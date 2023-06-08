@@ -133,3 +133,22 @@ def shuffle(
     rng.shuffle(x, axis=axis)
 
     return x
+
+
+def bytes(
+    length: int,
+    /,
+    *,
+    seed: Optional[int] = None,
+    out: Optional[np.ndarray] = None,
+) -> Union[bytes, np.ndarray]:
+    if seed:
+        np.random.seed(seed)
+    x = np.random.bytes(length)
+
+    if out is not None:
+        for i in range(length):
+            out[i] = x[i]
+        return out
+
+    return x
