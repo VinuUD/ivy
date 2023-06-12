@@ -162,3 +162,10 @@ def negative_binomial(n, p, size=None):
         size = (size,)
     lambda_ = ivy.gamma(n, scale, shape=size)
     return ivy.poisson(lam=lambda_, shape=size)
+
+
+@to_ivy_arrays_and_back
+@from_zero_dim_arrays_to_scalar
+def bytes(length, /):
+    ret = ivy.bytes(length)
+    return ret
