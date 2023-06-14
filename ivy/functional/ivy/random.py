@@ -605,3 +605,47 @@ def shuffle(
     }
     """
     return ivy.current_backend(x).shuffle(x, axis, seed=seed, out=out)
+
+
+@handle_exceptions
+@handle_nestable
+@handle_out_argument
+@to_native_arrays_and_back
+@handle_array_function
+def bytes(
+    length: int,
+    /,
+    *,
+    seed: Optional[int] = None,
+    out: Optional[ivy.Array] = None,
+) -> Union[bytes, ivy.Array]:
+    r"""
+    Return a random byte array of the given length.
+
+    Parameters
+    ----------
+    length
+        The length of the byte array to return.
+    seed
+        A python integer. Used to create a random seed distribution
+    out
+        optional output array, for writing the result to. It must have a shape that the
+        inputs broadcast to.
+
+    Returns
+    -------
+    ret
+        A random byte array of the given length.
+
+    Examples
+    --------
+    >>> ivy.bytes(3)
+    b'\xd6\xf4\x97'
+
+    >>> ivy.bytes(3, seed=42)
+    b'f\xdc\xe1'
+
+    >>> ivy.bytes(3, seed=42, out=ivy.array([0, 0, 0]))
+    ivy.array([102, 220, 225])
+    """
+    return ivy.current_backend().bytes(length, seed=seed, out=out)
